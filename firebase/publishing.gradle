@@ -1,0 +1,17 @@
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = "io.alperbry.buildtrackerclient"
+                artifactId = 'firebase'
+                version = "0.1-SNAPSHOT"
+                from components.java
+
+                pom {
+                    name = 'Build Tracker Firebase Client'
+                    description = 'A concise description of my library'
+                }
+            }
+        }
+    }
+}
