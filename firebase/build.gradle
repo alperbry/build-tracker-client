@@ -2,13 +2,16 @@ plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'maven-publish'
 }
 
+group 'build-tracker-client'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
     google()
+    mavenLocal()
 }
 
 dependencies {
@@ -21,6 +24,27 @@ dependencies {
     implementation "io.ktor:ktor-client-serialization:${versions.ktor}"
     implementation "io.ktor:ktor-client-content-negotiation:${versions.ktor}"
     implementation "io.ktor:ktor-serialization-kotlinx-json:${versions.ktor}"
+    implementation "io.ktor:ktor-client-auth:${versions.ktor}"
+    implementation "io.ktor:ktor-client-encoding:${versions.ktor}"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-datetime:${versions.date}"
 
     api project('::core')
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = 'firebase'
+                from components.java
+
+                pom {
+                    name = 'Build Tracker Firebase Client'
+                    description = 'A concise description of my library'
+                }
+            }
+        }
+    }
+
 }
