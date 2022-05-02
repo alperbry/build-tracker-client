@@ -26,7 +26,7 @@ object BuildTrackerClientProvider {
     ): FirebaseBuildTrackerClient {
 
         if (listOf(email, password, apiKey, databaseId).any(String::isEmpty)) {
-            throw IllegalArgumentException("Provided Firebase credentials should not be empty.")
+            throw IllegalArgumentException("Firebase credentials should be provided as expected.")
         }
 
         val apiKeyInterceptor = ApiKeyInterceptor(apiKey)
